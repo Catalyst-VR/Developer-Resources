@@ -7,12 +7,15 @@
 ### File Converter
 (https://transfonter.org/)
 
-## Images
+## Images and Icons
 ### File Compression
 [TinyPNG](https://tinypng.com/)
 
 ### Placeholder / Generic Image Library
 [Unsplash](https://unsplash.com/)
+
+### SVG Loading Spinners Library
+(https://github.com/n3r4zzurr0/svg-spinners)
 
 ## WebXR Device API
 ### Docs
