@@ -1,4 +1,5 @@
-# Photon Networking: Synchronising Player Interaction
+
+# Photon Networking: Synchronising Players
 
 
 
@@ -30,13 +31,14 @@ This can be done through scripting only if the 'Ownership Transfer' variable is 
 
 -Create a new C# script, name it something like 'PlayerInstantiation' and copy this into it
 
-	using Photon.Pun;
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
+```csharp
+using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-	public class PlayerInstantiation : MonoBehaviour
-	{
+public class PlayerInstantiation : MonoBehaviour
+{
 
     public static void SpawnPlayer()
     {
@@ -51,8 +53,8 @@ This can be done through scripting only if the 'Ownership Transfer' variable is 
         return playerPos;
     }
 
-	}
-
+}
+```
 -Here a new Player object is being spawned at a random location each time a new player joins the game
 
 
@@ -60,22 +62,39 @@ This can be done through scripting only if the 'Ownership Transfer' variable is 
 ## Allowing For Different Player Input:
 
 
+-Complete 'Spawning Players' before starting
+
+-Add a Photon Transform View to your Player prefab
+
+-Create a basic movement script, name it 'Movement' and attatch it to your Player prefab
+
+-Make a new C# script called 'PlayerSetup', attatch it to your Player prefab and copy this into it
 
 
+```csharp
+using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class PlayerSetup : MonoBehaviour
+{
+    [SerializeField]
+    Movement moveScript;
 
+    [SerializeField]
+    PhotonView playerView;
 
+    void Awake()
+    {
+        if(!playerView.IsMine)
+        {
+            moveScript.enabled = false;
+        }
+    }
+}
+```
 
-
-
-
-
-
-
-
-
-
-
-
+-This script disables the Movement script if the client isn't the creator of this Player object, allowing them only to control themselves
 
 

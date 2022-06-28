@@ -1,3 +1,4 @@
+
 # Photon Networking: Getting Started
 
 
@@ -41,15 +42,15 @@
 
 -In your Unity Project create a new C# script and name it something along the lines of 'Network Manager', attatch it to a Game Object in your scene then copy this inside
 
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using Photon.Pun;
-	using Photon.Realtime;
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-	public class NetworkManager : MonoBehaviourPunCallbacks
-	{
-
+public class NetworkManager : MonoBehaviourPunCallbacks
+{
     void Start()
     {
         if (!PhotonNetwork.IsConnected)
@@ -95,9 +96,11 @@
 
     public override void OnJoinedRoom()
     {
-        print(PhotonNetwork.CurrentRoom.PlayerCount);
+        PlayerInstantiation.SpawnPlayer();
     }
-	}
+
+}
+```
 
 -The overall purpose of this code is to join a random public lobby, breaking it down further:
 

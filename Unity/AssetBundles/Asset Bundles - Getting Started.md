@@ -12,16 +12,25 @@
 
 -Include this code in that script **make sure to replace the examplepath and build target params with appropriate ones**
 
-    using UnityEditor;
-    public class BundleBuilder : Editor
-    {
-        [MenuItem("Assets/ Build AssetBundles")]
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
 
-        static void BuildAllAssetBundles()
-        {
-            BuildPipeline.BuildAssetBundles("C:/ExamplePath", BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.StandaloneWindows64);
-        }
+public class BundleBuilder : Editor
+{
+
+    [MenuItem("Assets/ Build AssetBundles")]
+
+    static void BuildAllAssetBundles()
+    {
+        BuildPipeline.BuildAssetBundles("E:/Hard Disk", BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
     }
+
+
+}
+```
 
 -Assign all of the assets you want to be in a bundle to a bundle. Do this by selecting the assets then choosing a bundle with the dropdown menu at the bottom of the inspector
 
@@ -33,10 +42,11 @@
 
 -Create a new script and include this code
 
-    public string bundleURL;
-    IEnumerator Start()
-    {
-        using (WWW web = new WWW(bundleURL))
+```csharp
+public string bundleURL;
+IEnumerator Start()
+{
+	using (WWW web = new WWW(bundleURL))
         {
             //Retrieve bundle
             yield return web;
@@ -52,8 +62,9 @@
 
             //Finish bundle retrieval
             remoteAssetBundle.Unload(false);
-        }
-    }
+	}
+}
+```
 
 -This code will download the bundle based on url set in 'bundleURL' and place a chosen object from the bundle ("ExampleAsset") in the scene
 
@@ -63,6 +74,7 @@
         
 -Replace the loading asset bundle script with this one (make sure to include 'using UnityEngine.Networking;' at the top)
 
+```csharp
     IEnumerator Start()
     {
         string url = bundleURL;
@@ -83,6 +95,7 @@
             	bundle.Unload(false);
         }
     }
+```
 
 -It is mostly the same script except it uses UnityWebRequest instead of WWW as it allows you to obtain the progress of the download operation
 
